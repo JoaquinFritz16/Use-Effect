@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
+const categories = ["Family", "Office", "Children", "College", "Party", "Funny", "Unbelievable", "Developers", "Gaming"]
 function App() {
 	const [dogImage, setDogImage] = useState("");
 	const getDogImage = () => {
