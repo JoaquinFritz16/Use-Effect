@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 const categories = ["Family", "Office", "Children", "College", "Party", "Funny", "Unbelievable", "Developers", "Gaming"]
-function App() {
-	const [dogImage, setDogImage] = useState("");
-	const getDogImage = () => {
+function Excuser() {
+	const [excuse, setExcuse] = useState("");
+	const getExcuses = () => {
 		fetch("https://excuser-three.vercel.app/v1/excuse")
 			.then((response) => response.json())
-			.then((data) => setDogImage(data.message))
+			.then((data) => setExcuse(data[0].excuse))
 			.catch((error) => console.error("Error fetching data:", error));
 	};
-	useEffect(getDogImage, []);
+	useEffect(getExcuses, []);
 	return (
 		<div>
-			<h1>Random Dog Image</h1>
-			{dogImage && <img src={dogImage} alt="Random Dog" />}
+			<h1>Random Excuse</h1>
+			{excuse && <p>Excusa random: {excuse}</p>}
+			<div>
+				<button onClick={getExcuses}>Get Excuse</button>
+				<select onChange={(e)=>getExcuses(e.target.value)}>
+					{categories.map((category)=>{
+						return <option key={category} value={category}>{category}</option>
+					})}
+				</select>
+			</div>
 		</div>
 	);
 }
-export default App;
+export default Excuser;
